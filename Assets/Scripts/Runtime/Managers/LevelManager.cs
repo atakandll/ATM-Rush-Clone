@@ -74,7 +74,7 @@ public class LevelManager : MonoBehaviour
     public byte GetLevelID()
     {
         if (!ES3.FileExists()) return 0;
-        return (byte)(ES3.KeyExists("Level") ? ES3.Load<int>("Level") % totalLevelCount : 0);
+        return (byte)(ES3.KeyExists("Level") ? ES3.Load<int>("Level") % totalLeventCount : 0);
     }
 
     public void OnNextLevel()

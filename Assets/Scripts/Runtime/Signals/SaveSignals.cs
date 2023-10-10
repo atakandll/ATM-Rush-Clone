@@ -1,13 +1,10 @@
-﻿using UnityEngine;
+﻿using Runtime.Extensions;
+using UnityEngine.Events;
 
 namespace Runtime.Signals
 {
-    public class SaveSignals : MonoBehaviour
+    public class SaveSignals : MonoSingleton<SaveSignals>
     {
-        #region Singleton
-
-        public static SaveSignals Instance;
-
-        #endregion
+        public UnityAction onSaveGameData = delegate { };
     }
 }
