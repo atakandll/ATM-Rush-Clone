@@ -16,7 +16,6 @@ namespace Runtime.Controllers.UI
         [SerializeField] private TextMeshProUGUI stackLvlText;
         [SerializeField] private TextMeshProUGUI stackValue;
         [SerializeField] private TextMeshProUGUI incomeValue;
-        [SerializeField] private TextMeshProUGUI money;
         [SerializeField] private Button incomeLvlButton;
         [SerializeField] private Button stackLvlButton;
      
