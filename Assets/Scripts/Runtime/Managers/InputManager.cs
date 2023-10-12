@@ -104,7 +104,7 @@ namespace Runtime.Managers
                 {
                     if (_mousePosition != null)
                     {
-                        Vector2 mouseDeltaPos = (Vector2)Input.mousePosition - _mousePosition.Value;
+                        Vector2 mouseDeltaPos = (Vector2)Input.mousePosition - _mousePosition.Value; //şu anki fare pozisyonu ile önceki fare pozisyonu arasındaki fark hesaplanıyor.
                         
                         if (mouseDeltaPos.x > _data.HorizontalInputSpeed)
                             _moveVector.x = _data.HorizontalInputSpeed / 10f * mouseDeltaPos.x;
