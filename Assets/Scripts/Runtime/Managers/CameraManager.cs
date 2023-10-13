@@ -6,7 +6,6 @@ using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
-using CameraState = UnityEditor.Rendering.LookDev.CameraState;
 
 namespace Runtime.Managers
 {

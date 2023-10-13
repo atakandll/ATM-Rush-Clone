@@ -36,6 +36,7 @@ MonoBehaviour:
     - Boxophobic.PolyverseSkies.Runtime
     - Boxophobic.Utils.Scripts
     - Boxophobic.PolyverseSkies.Scripts
+    - Cinemachine
     - PPv2URPConverters
     - Sirenix.OdinInspector.Modules.UnityMathematics
     - Boxophobic.PolyverseSkies.Editor
