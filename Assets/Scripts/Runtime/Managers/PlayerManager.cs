@@ -51,23 +51,21 @@ namespace Runtime.Managers
         }
 
         private void SubscribeEvents()
-        { 
-            InputSignals.Instance.onInputTaken += () => movementController.IsReadyToMove(true);
-            InputSignals.Instance.onInputReleased += () => movementController.IsReadyToMove(false);
+        {
+            InputSignals.Instance.onInputTaken += () => PlayerSignals.Instance.onMoveConditionChanged.Invoke(true);
+            InputSignals.Instance.onInputReleased += () => PlayerSignals.Instance.onMoveConditionChanged.Invoke(false);
             InputSignals.Instance.onInputDragged += OnInputDragged;
             CoreGameSignals.Instance.onPlay += OnPlay;
-            CoreGameSignals.Instance.onLevelSuccessful += () => movementController.IsReadyToPlay(false);
-            CoreGameSignals.Instance.onLevelFailed += () => movementController.IsReadyToPlay(false);
+            CoreGameSignals.Instance.onLevelSuccessful += () => PlayerSignals.Instance.onPlayConditionChanged(true);
+            CoreGameSignals.Instance.onLevelFailed += () => PlayerSignals.Instance.onPlayConditionChanged(false);
             CoreGameSignals.Instance.onReset += OnReset;
             
-            ScoreSignals.Instance.onSetTotalScore += meshController.OnSetTotalScore;
+            //ScoreSignals.Instance.onSetTotalScore +=PlayerSignals.Instance.onSetTotalScore?.Invoke();
             CoreGameSignals.Instance.onMiniGameEntered += OnMiniGameEntered;
         }
-        
-
         private void OnPlay()
         {
-            movementController.IsReadyToPlay(true);
+            PlayerSignals.Instance.onPlayConditionChanged?.Invoke(true);
             PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Run);
         }
         
@@ -78,7 +76,7 @@ namespace Runtime.Managers
         
         private void OnMiniGameEntered()
         {
-            movementController.IsReadyToPlay(false);
+            PlayerSignals.Instance.onPlayConditionChanged.Invoke(false);
             StartCoroutine(WaitForFinal());
         }
         
@@ -90,18 +88,28 @@ namespace Runtime.Managers
 
         private void UnsubscribeEvents()
         {
-            InputSignals.Instance.onInputTaken -= () => movementController.IsReadyToMove(true);
-            InputSignals.Instance.onInputReleased -= () => movementController.IsReadyToMove(false);
+            InputSignals.Instance.onInputTaken -= () => PlayerSignals.Instance.onMoveConditionChanged.Invoke(true);
+            InputSignals.Instance.onInputReleased -= () => PlayerSignals.Instance.onMoveConditionChanged.Invoke(false);
             InputSignals.Instance.onInputDragged -= OnInputDragged;
             CoreGameSignals.Instance.onPlay -= OnPlay;
-            CoreGameSignals.Instance.onLevelSuccessful -= () => movementController.IsReadyToPlay(false);
-            CoreGameSignals.Instance.onLevelFailed -= () => movementController.IsReadyToPlay(false);
+            CoreGameSignals.Instance.onLevelSuccessful -= () => PlayerSignals.Instance.onPlayConditionChanged(true);
+            CoreGameSignals.Instance.onLevelFailed -= () => PlayerSignals.Instance.onPlayConditionChanged(false);
             CoreGameSignals.Instance.onReset -= OnReset;
+            
+            //ScoreSignals.Instance.onSetTotalScore -= meshController.OnSetTotalScore;
+            CoreGameSignals.Instance.onMiniGameEntered -= OnMiniGameEntered;
         }
 
         private void OnDisable()
         {
             UnsubscribeEvents();
+        }
+
+        internal void SetStackPosition()
+        {
+            var position = transform.position;
+            Vector2 pos = new Vector2(position.x, position.z);
+            //StackSignals.Instance.onSetStackFollowPlayer?.Invoke(pos);
         }
 
         IEnumerator WaitForFinal()

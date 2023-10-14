@@ -1,5 +1,9 @@
-﻿using Runtime.Data.ValueObject;
+﻿using System;
+using DG.Tweening.Plugins.Options;
+using Runtime.Data.ValueObject;
 using Runtime.Keys;
+using Runtime.Managers;
+using Runtime.Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -9,13 +13,20 @@ namespace Runtime.Controllers.Player
     {
         #region Self Variables
 
+        #region Serialized Variables
+
+        [SerializeField] private PlayerManager manager;
+        [SerializeField] private Rigidbody rigidbody;
+
+        #endregion
+
         #region Private Variables
 
         [ShowInInspector] private PlayerMovementData _data;
-        
-        [Header("Additional Value")] [ShowInInspector]
-        private bool _isReadyToPlay, _isReadyToMove;
- 
+        [ShowInInspector] private bool _isReadyToPlay, _isReadyToMove;
+        [ShowInInspector] private float _inputValue;
+        [ShowInInspector] private Vector2 _clampValue;
+
         #endregion
 
         #endregion
@@ -24,18 +35,94 @@ namespace Runtime.Controllers.Player
             _data = movementData;
         }
 
-        internal void IsReadyToMove(bool condition) => _isReadyToMove = condition;
-        internal void IsReadyToPlay(bool condition) => _isReadyToPlay = condition;
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            PlayerSignals.Instance.onPlayConditionChanged += onPlayConditionChanged;
+            PlayerSignals.Instance.onMoveConditionChanged += onMoveConditionChanged;
+        }
+        private void UnSubscribeEvents()
+        {
+            PlayerSignals.Instance.onPlayConditionChanged -= onPlayConditionChanged;
+            PlayerSignals.Instance.onMoveConditionChanged -= onMoveConditionChanged;
+        }
+        private void OnDisable()
+        {
+            UnSubscribeEvents();
+        }
+        
+        private void onPlayConditionChanged(bool condition) => _isReadyToPlay = condition;
+        private void onMoveConditionChanged(bool condition) => _isReadyToMove = condition;
 
 
         public void UpdateInputValue(HorizontalInputParams inputParams)
         {
-            throw new System.NotImplementedException();
+            _inputValue = inputParams.HorizontalInputValue;
+            _clampValue = inputParams.HorizontalInputClampSides;
+        }
+
+        private void Update()
+        {
+            if (_isReadyToPlay)
+            {
+                manager.SetStackPosition();
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (_isReadyToPlay)
+            {
+                if (_isReadyToMove)
+                {
+                    Move();
+                }
+                else
+                {
+                    StopSideways();
+                }
+            }
+            else
+            {
+                Stop();
+            }
+        }
+
+        private void Move()
+        {
+            var velocity = rigidbody.velocity;
+            velocity = new Vector3(_inputValue * _data.SidewaysSpeed, velocity.y, _data.ForwardSpeed);
+            rigidbody.velocity = velocity;
+
+            Vector3 position;
+            position = new Vector3(Mathf.Clamp(rigidbody.position.x, _clampValue.x, _clampValue.y),
+                (position = rigidbody.position).y, position.z);
+
+            rigidbody.position = position;
+        }
+
+        private void StopSideways()
+        {
+            rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, _data.ForwardSpeed);
+            rigidbody.angularVelocity = Vector3.zero;
+        }
+
+        private void Stop()
+        {
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
+            
         }
 
         public void OnReset()
         {
-            throw new System.NotImplementedException();
+            Stop();
+           _isReadyToMove = false;
+           _isReadyToPlay = false;
         }
     }
 }
