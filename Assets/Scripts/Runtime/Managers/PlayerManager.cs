@@ -60,9 +60,12 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onLevelFailed += () => PlayerSignals.Instance.onPlayConditionChanged(false);
             CoreGameSignals.Instance.onReset += OnReset;
             
-            //ScoreSignals.Instance.onSetTotalScore +=PlayerSignals.Instance.onSetTotalScore?.Invoke();
+            ScoreSignals.Instance.onSetTotalScore += OnSetTotalScore;
             CoreGameSignals.Instance.onMiniGameEntered += OnMiniGameEntered;
         }
+
+        
+
         private void OnPlay()
         {
             PlayerSignals.Instance.onPlayConditionChanged?.Invoke(true);
@@ -78,6 +81,10 @@ namespace Runtime.Managers
         {
             PlayerSignals.Instance.onPlayConditionChanged.Invoke(false);
             StartCoroutine(WaitForFinal());
+        }
+        private void OnSetTotalScore(int value)
+        {
+            PlayerSignals.Instance.onSetTotalScore?.Invoke(value);
         }
         
         private void OnReset()
@@ -96,7 +103,7 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onLevelFailed -= () => PlayerSignals.Instance.onPlayConditionChanged(false);
             CoreGameSignals.Instance.onReset -= OnReset;
             
-            //ScoreSignals.Instance.onSetTotalScore -= meshController.OnSetTotalScore;
+            ScoreSignals.Instance.onSetTotalScore -= OnSetTotalScore;
             CoreGameSignals.Instance.onMiniGameEntered -= OnMiniGameEntered;
         }
 

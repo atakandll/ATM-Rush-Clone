@@ -35,7 +35,6 @@ namespace Runtime.Controllers.UI
             UISignals.Instance.onSetMoneyValue += OnSetMoneyValue;
             UISignals.Instance.onGetMoneyValue += OnGetMoneyValue;
         }
-
         private int OnGetMoneyValue()
         {
             return _moneyValue;
@@ -51,13 +50,15 @@ namespace Runtime.Controllers.UI
         {
             levelText.text = "LEVEL" + ++levelValue;
         }
+        
         private void UnsubscribeEvents()
         {
             UISignals.Instance.onSetNewLevelValue -= OnSetNewLevelValue;
             UISignals.Instance.onSetMoneyValue -= OnSetMoneyValue;
             UISignals.Instance.onGetMoneyValue -= OnGetMoneyValue;
-        }
 
+        }
+        
         private void OnDisable()
         {
             UnsubscribeEvents();
