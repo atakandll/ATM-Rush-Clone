@@ -60,7 +60,7 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onLevelFailed += () => PlayerSignals.Instance.onPlayConditionChanged(false);
             CoreGameSignals.Instance.onReset += OnReset;
             
-            ScoreSignals.Instance.onSetTotalScore += OnSetTotalScore;
+            PlayerSignals.Instance.onSetTotalScore += OnSetTotalScore;
             CoreGameSignals.Instance.onMiniGameEntered += OnMiniGameEntered;
         }
 
@@ -103,7 +103,7 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onLevelFailed -= () => PlayerSignals.Instance.onPlayConditionChanged(false);
             CoreGameSignals.Instance.onReset -= OnReset;
             
-            ScoreSignals.Instance.onSetTotalScore -= OnSetTotalScore;
+            PlayerSignals.Instance.onSetTotalScore -= OnSetTotalScore;
             CoreGameSignals.Instance.onMiniGameEntered -= OnMiniGameEntered;
         }
 
