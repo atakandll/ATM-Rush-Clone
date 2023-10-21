@@ -43,7 +43,7 @@ namespace Runtime.Controllers.Player
             animator.SetTrigger(states.ToString());
         }
 
-        public void OnReset()
+        internal void OnReset()
         {
            PlayerSignals.Instance.onChangePlayerAnimationState?.Invoke(PlayerAnimationStates.Idle);
         }
