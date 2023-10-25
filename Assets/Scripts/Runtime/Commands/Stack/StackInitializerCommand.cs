@@ -1,13 +1,17 @@
-﻿using Runtime.Managers;
+﻿using System.Collections.Generic;
+using Runtime.Managers;
+using UnityEngine;
 
 namespace Runtime.Commands.Stack
 {
     public class StackInitializerCommand
     {
         private StackManager _stackManager;
-        public StackInitializerCommand(StackManager stackManager)
+        private List<GameObject> _collectableStack;
+        public StackInitializerCommand(StackManager stackManager, ref List<GameObject> collectableStack)
         {
-            throw new System.NotImplementedException();
+            _stackManager = stackManager;
+            _collectableStack = collectableStack;
         }
 
         public void Execute()

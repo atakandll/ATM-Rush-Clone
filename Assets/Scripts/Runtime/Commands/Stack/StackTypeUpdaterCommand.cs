@@ -1,13 +1,29 @@
-﻿using Runtime.Managers;
+﻿using System.Collections.Generic;
+using Runtime.Managers;
+using Runtime.Signals;
+using UnityEngine;
 
 namespace Runtime.Commands.Stack
 {
     public class StackTypeUpdaterCommand
     {
-        private StackManager _stackManager;
-        public StackTypeUpdaterCommand(StackManager stackManager)
+        private List<GameObject> _collectableStack;
+        private int _totalListScore;
+        public StackTypeUpdaterCommand( ref List<GameObject> collectableStack)
         {
-            _stackManager = stackManager;
+            _collectableStack = collectableStack;
+        }
+
+        public void Execute()
+        {
+            _totalListScore = 0;
+
+            foreach (var item in _collectableStack)
+            {
+                // _totalListScore += item.GetComponent<CollectableManager>().CollectableTypeValue + 1;
+
+            }
+            ScoreSignals.Instance.onSetScore?.Invoke(_totalListScore);
         }
     }
 }
