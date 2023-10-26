@@ -20,7 +20,7 @@ namespace Runtime.Commands.Stack
 
             foreach (var item in _collectableStack)
             {
-                // _totalListScore += item.GetComponent<CollectableManager>().CollectableTypeValue + 1;
+                _totalListScore += item.GetComponent<CollectableManager>().GetCurrentValue() + 1;
 
             }
             ScoreSignals.Instance.onSetScore?.Invoke(_totalListScore);

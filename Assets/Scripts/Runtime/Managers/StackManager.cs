@@ -107,8 +107,8 @@ namespace Runtime.Managers
 
         private void OnInteractionAtm(GameObject collectableGameobject)
         {
-           // ScoreSignals.Instance.onSetAtmScore?.Invoke((int)collectableGameObject.GetComponent<CollectableManager>()
-             //   .GetCurrentValue() + 1);
+            ScoreSignals.Instance.onSetAtmScore?.Invoke((int)collectableGameobject.GetComponent<CollectableManager>()
+                .GetCurrentValue() + 1);
              
             if (_lastCheck == false)
             {
