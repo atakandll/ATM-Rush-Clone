@@ -25,7 +25,7 @@ namespace Runtime.Commands.Feature
             _incomeLevel += 1;
             ScoreSignals.Instance.onSendMoney?.Invoke((int) _newPriceTag);
             UISignals.Instance.onSetMoneyValue?.Invoke((int) _newPriceTag);
-            -_featureManager.SaveFeatureData();
+            _featureManager.SaveFeatureData();
         }
     }
 }

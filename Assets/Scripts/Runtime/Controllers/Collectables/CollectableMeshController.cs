@@ -13,7 +13,6 @@ namespace Runtime.Controllers.Collectables
         #region Serialized Variables
 
         [SerializeField] private new MeshFilter meshFilter;
-        [SerializeField] private new MeshRenderer meshRenderer;
 
         #endregion
 

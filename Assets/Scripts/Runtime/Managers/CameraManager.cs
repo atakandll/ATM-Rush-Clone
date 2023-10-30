@@ -57,8 +57,8 @@ namespace Runtime.Managers
 
         private void OnSetCinemachineTarget(CameraTargetState arg0)
         {
-            //var playerManager = FindObjectOfType<PlayerManager>().transform;
-            //stateDrivenCamera.Follow = playerManager;
+            var playerManager = FindObjectOfType<PlayerManager>().transform;
+            stateDrivenCamera.Follow = playerManager;
         }
         
         private void OnDisable()
