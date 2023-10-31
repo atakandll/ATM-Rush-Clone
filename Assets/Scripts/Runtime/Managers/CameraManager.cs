@@ -1,5 +1,6 @@
 ﻿using System;
 using Cinemachine;
+using Runtime.Controllers.MiniGame;
 using Runtime.Enums;
 using Runtime.Signals;
 using Sirenix.OdinInspector;
@@ -55,10 +56,28 @@ namespace Runtime.Managers
             animator.SetTrigger(cameraState.ToString());
         }
 
-        private void OnSetCinemachineTarget(CameraTargetState arg0)
+        private void OnSetCinemachineTarget(CameraTargetState state)
         {
-            var playerManager = FindObjectOfType<PlayerManager>().transform;
-            stateDrivenCamera.Follow = playerManager;
+            switch (state)
+            {
+                case CameraTargetState.Player:
+                {
+                    var playerManager = FindObjectOfType<PlayerManager>().transform;
+                    stateDrivenCamera.Follow = playerManager;
+                }
+                    break;
+                case CameraTargetState.FakePlayer:
+                {
+                    stateDrivenCamera.Follow = null;
+                    var fakePlayer = FindObjectOfType<WallCheckController>().transform.parent.transform;
+                    stateDrivenCamera.Follow = fakePlayer;
+                }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(state), state, null);
+                
+            }
+           
         }
         
         private void OnDisable()

@@ -1111,7 +1111,7 @@ Animator:
   m_GameObject: {fileID: 984967089}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b7f7b03a6560e0e4989530bac8e007ff, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1e2886dc8c6ea49bd9e63729d5507e4b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1150,15 +1150,15 @@ MonoBehaviour:
   - {fileID: 1350337226}
   - {fileID: 279189656}
   m_Instructions:
-  - m_FullHash: -155709248
+  - m_FullHash: -1357879663
     m_VirtualCamera: {fileID: 1519164711}
     m_ActivateAfter: 0
     m_MinDuration: 0
-  - m_FullHash: 102088882
+  - m_FullHash: 492734158
     m_VirtualCamera: {fileID: 1350337226}
     m_ActivateAfter: 0
     m_MinDuration: 0
-  - m_FullHash: 99976972
+  - m_FullHash: 432033304
     m_VirtualCamera: {fileID: 279189656}
     m_ActivateAfter: 0
     m_MinDuration: 0
@@ -1171,8 +1171,14 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
-  m_ParentHash: []
+  m_CustomBlends: {fileID: 11400000, guid: f2c7e7a736c286346a3d91e5c7de9057, type: 2}
+  m_ParentHash:
+  - m_Hash: -1357879663
+    m_ParentHash: 756556552
+  - m_Hash: 492734158
+    m_ParentHash: 756556552
+  - m_Hash: 432033304
+    m_ParentHash: 756556552
 --- !u!114 &984967093
 MonoBehaviour:
   m_ObjectHideFlags: 0

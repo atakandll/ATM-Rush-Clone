@@ -52,7 +52,10 @@ namespace Runtime.Controllers.Player
             if (other.CompareTag(_miniGame))
             {
                 CoreGameSignals.Instance.onMiniGameEntered?.Invoke();
-                CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.MiniGame);
+                DOVirtual.DelayedCall(1.5f,
+                    () => CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.MiniGame));
+                DOVirtual.DelayedCall(2.5f,
+                    () => CameraSignals.Instance.onSetCinemachineTarget?.Invoke(CameraTargetState.FakePlayer));
                 return;
             }
         }

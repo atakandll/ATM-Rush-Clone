@@ -45,14 +45,7 @@ namespace Runtime.Managers
         {
             meshController.SetMeshData(_collectableData.MeshData);
         }
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
-        private void SubscribeEvents()
-        {
-            CollectableSignals.Instance.onCollectableUpgrade += OnCollectableUpgrade;
-        }
+        
         internal void OnCollectableUpgrade(int value)
         {
             if (_currentValue < 2) // Bu, bir tür sınırlama getirerek toplanabilir nesnenin yükseltme sayısını en fazla 2 yapar.
@@ -61,14 +54,6 @@ namespace Runtime.Managers
             meshController.OnUpgradeCollectableVisuals(_currentValue);
             
             StackSignals.Instance.onUpdateType?.Invoke();
-        }
-        private void UnSubscribeEvents()
-        {
-            CollectableSignals.Instance.onCollectableUpgrade -= OnCollectableUpgrade;
-        }
-        private void OnDisable()
-        {
-            UnSubscribeEvents();
         }
         public byte GetCurrentValue()
         {

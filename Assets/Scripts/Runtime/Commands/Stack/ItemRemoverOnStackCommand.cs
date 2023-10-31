@@ -19,15 +19,15 @@ namespace Runtime.Commands.Stack
             
         }
 
-        public void Execute(GameObject collectableGameobject)
+        public void Execute(GameObject collectableGameObject)
         {
-            int index = _collectableStack.IndexOf(collectableGameobject);
+            int index = _collectableStack.IndexOf(collectableGameObject);
             int last = _collectableStack.Count - 1;
+            collectableGameObject.transform.SetParent(_levelHolder.transform.GetChild(0));
+            collectableGameObject.SetActive(false);
+            _stackManager.StackJumperCommand.Execute(last, index);
             _collectableStack.RemoveAt(index);
             _collectableStack.TrimExcess();
-            collectableGameobject.transform.SetParent(_levelHolder.transform.GetChild(0));
-            collectableGameobject.SetActive(false);
-            _stackManager.StackJumperCommand.Execute(last, index); // we jump collectables that collision with obstacles index to last
             _stackManager.StackTypeUpdaterCommand.Execute();
         }
     }
