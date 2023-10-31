@@ -11,12 +11,14 @@ namespace Runtime.Commands.Stack
         private StackData _data;
         private List<GameObject> _collectableStack;
         private Transform _levelHolder;
-        public StackJumperCommand(ref StackData stackData, ref List<GameObject> collectableStack)
+
+        public StackJumperCommand(StackData stackData, ref List<GameObject> collectableStack)
         {
             _data = stackData;
             _collectableStack = collectableStack;
             _levelHolder = GameObject.Find("LevelHolder").transform;
         }
+
         public void Execute(int last, int index)
         {
             for (int i = last; i > index; i--)
@@ -32,7 +34,7 @@ namespace Runtime.Commands.Stack
                     Random.Range(1, 3), 0.5f
                 );
                 _collectableStack[i].transform.DOScale(Vector3.one, 0);
-                _collectableStack.RemoveAt(i); // we remove item in stack  after jump
+                _collectableStack.RemoveAt(i);
                 _collectableStack.TrimExcess();
             }
         }

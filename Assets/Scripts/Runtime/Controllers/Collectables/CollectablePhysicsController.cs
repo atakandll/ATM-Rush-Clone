@@ -20,7 +20,7 @@ namespace Runtime.Controllers.Collectables
         private readonly string _gate = "Gate";
         private readonly string _atm = "ATM";
         private readonly string _obstacle = "Obstacle";
-        private readonly string _conveyor = "Conveyor";
+        private readonly string _conveyor = "MiniGame";
 
         #endregion
 

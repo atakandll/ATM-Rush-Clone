@@ -12,7 +12,7 @@ namespace Runtime.Managers
 {
     public class CameraManager : MonoBehaviour
     {
-       #region Self Variables
+        #region Self Variables
 
         #region Serialized Variables
 

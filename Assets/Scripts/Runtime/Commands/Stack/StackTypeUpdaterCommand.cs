@@ -9,7 +9,8 @@ namespace Runtime.Commands.Stack
     {
         private List<GameObject> _collectableStack;
         private int _totalListScore;
-        public StackTypeUpdaterCommand( ref List<GameObject> collectableStack)
+
+        public StackTypeUpdaterCommand(ref List<GameObject> collectableStack)
         {
             _collectableStack = collectableStack;
         }
@@ -17,12 +18,11 @@ namespace Runtime.Commands.Stack
         public void Execute()
         {
             _totalListScore = 0;
-
-            foreach (var item in _collectableStack)
+            foreach (var items in _collectableStack)
             {
-                _totalListScore += item.GetComponent<CollectableManager>().GetCurrentValue() + 1;
-
+                _totalListScore += items.GetComponent<CollectableManager>().GetCurrentValue() + 1;
             }
+
             ScoreSignals.Instance.onSetScore?.Invoke(_totalListScore);
         }
     }

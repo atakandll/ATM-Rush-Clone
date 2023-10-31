@@ -12,7 +12,8 @@ namespace Runtime.Commands.Stack
         private StackManager _stackManager;
         private StackData _stackData;
         private List<GameObject> _collectableStack;
-        public StackAnimatorCommand(StackManager stackManager, ref StackData stackData,
+
+        public StackAnimatorCommand(StackManager stackManager, StackData stackData,
             ref List<GameObject> collectableStack)
         {
             _stackManager = stackManager;
@@ -24,7 +25,7 @@ namespace Runtime.Commands.Stack
         {
             for (int i = 0; i <= _collectableStack.Count - 1; i++)
             {
-                int index = (_collectableStack.Count - 1) - i; // first animation implement index 4 means last element
+                int index = (_collectableStack.Count - 1) - i;
                 _collectableStack[index].transform
                     .DOScale(
                         new Vector3(_stackData.StackScaleValue, _stackData.StackScaleValue, _stackData.StackScaleValue),
