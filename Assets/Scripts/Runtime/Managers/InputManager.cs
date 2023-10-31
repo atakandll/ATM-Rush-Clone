@@ -19,9 +19,9 @@ namespace Runtime.Managers
         private float _positionValuesX;
         private bool _isTouching;
 
-        private float _currentVelocity;
-        private Vector2? _mousePosition;
-        private Vector3 _moveVector;
+        private float _currentVelocity; // ref type
+        private Vector2? _mousePosition; // ref type
+        private Vector3 _moveVector; // ref type
         
         [Header("Data")] private InputData _data;
         [ShowInInspector] private bool _isFirstTimeTouchTaken;
@@ -33,7 +33,7 @@ namespace Runtime.Managers
 
         private void Awake()
         {
-            GetInputData();
+           _data = GetInputData();
         }
         private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").Data;
 

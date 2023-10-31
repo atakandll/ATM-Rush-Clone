@@ -50,6 +50,7 @@ namespace Runtime.Managers
             CameraSignals.Instance.onSetCinemachineTarget += OnSetCinemachineTarget;
             CameraSignals.Instance.onChangeCameraState += OnChangeCameraState;
         }
+        
 
         private void OnChangeCameraState(CameraStates cameraState)
         {

@@ -84,7 +84,7 @@ namespace Runtime.Managers
         }
         private void OnSetTotalScore(int value)
         {
-            PlayerSignals.Instance.onSetTotalScore?.Invoke(value);
+            meshController.OnSetTotalScore(value);
         }
         
         private void OnReset()

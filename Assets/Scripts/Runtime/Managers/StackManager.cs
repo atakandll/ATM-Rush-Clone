@@ -36,7 +36,7 @@ namespace Runtime.Managers
 
         #region Private Variables
 
-        [ShowInInspector] private StackData _data;
+        private StackData _data;
         private List<GameObject> _collectableStack = new List<GameObject>();
         private bool _lastCheck;
         

@@ -18,7 +18,6 @@ namespace Runtime.Controllers.UI
         #region Private Variables
 
         private int _moneyValue;
-        
 
         #endregion
 
@@ -35,9 +34,15 @@ namespace Runtime.Controllers.UI
             UISignals.Instance.onSetMoneyValue += OnSetMoneyValue;
             UISignals.Instance.onGetMoneyValue += OnGetMoneyValue;
         }
+
         private int OnGetMoneyValue()
         {
             return _moneyValue;
+        }
+
+        private void OnSetNewLevelValue(byte levelValue)
+        {
+            levelText.text = "LEVEL " + ++levelValue;
         }
 
         private void OnSetMoneyValue(int moneyValue)
@@ -46,19 +51,13 @@ namespace Runtime.Controllers.UI
             moneyText.text = moneyValue.ToString();
         }
 
-        private void OnSetNewLevelValue(byte levelValue)
-        {
-            levelText.text = "LEVEL" + ++levelValue;
-        }
-        
         private void UnsubscribeEvents()
         {
             UISignals.Instance.onSetNewLevelValue -= OnSetNewLevelValue;
             UISignals.Instance.onSetMoneyValue -= OnSetMoneyValue;
             UISignals.Instance.onGetMoneyValue -= OnGetMoneyValue;
-
         }
-        
+
         private void OnDisable()
         {
             UnsubscribeEvents();
