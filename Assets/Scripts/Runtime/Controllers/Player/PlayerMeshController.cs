@@ -17,24 +17,7 @@ namespace Runtime.Controllers.Player
         #endregion
 
         #endregion
-
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
-        private void SubscribeEvents()
-        {
-           PlayerSignals.Instance.onSetTotalScore += OnSetTotalScore;
-        }
-        private void UnsubscribeEvents()
-        {
-            PlayerSignals.Instance.onSetTotalScore -= OnSetTotalScore;
-        }
-        private void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
-
+        
         public void OnSetTotalScore(int score)
         {
            scoreText.text = score.ToString();

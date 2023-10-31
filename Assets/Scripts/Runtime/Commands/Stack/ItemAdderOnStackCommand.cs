@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 using Runtime.Data.ValueObject;
 using Runtime.Managers;
 using UnityEngine;
@@ -23,7 +24,7 @@ namespace Runtime.Commands.Stack
             {
                 _collectableStack.Add(collectableGameobject);
                 collectableGameobject.transform.SetParent(_stackManager.transform);
-                collectableGameobject.transform.localPosition = Vector3.zero; // new collectable gameobject position = centre position
+                collectableGameobject.transform.localPosition = new Vector3(0,1f,0.335f); // new collectable gameobject position = centre position
             }
             else
             {
