@@ -16,20 +16,21 @@ namespace Runtime.Controllers.Player
         #region Serialized Variables
 
         [SerializeField] private PlayerManager manager;
-        [SerializeField] private Rigidbody rigidbody;
+        [SerializeField] private new Rigidbody rigidbody;
 
         #endregion
 
         #region Private Variables
 
-        [ShowInInspector] private PlayerMovementData _data;
-        [ShowInInspector] private bool _isReadyToPlay, _isReadyToMove;
+        [Header("Data")] [ShowInInspector] private PlayerMovementData _data;
+        [ShowInInspector] private bool _isReadyToMove, _isReadyToPlay;
         [ShowInInspector] private float _inputValue;
-        [ShowInInspector] private Vector2 _clampValue;
+        [ShowInInspector] private Vector2 _clampValues;
 
         #endregion
 
         #endregion
+
         internal void SetMovementData(PlayerMovementData movementData)
         {
             _data = movementData;
@@ -42,27 +43,28 @@ namespace Runtime.Controllers.Player
 
         private void SubscribeEvents()
         {
-            PlayerSignals.Instance.onPlayConditionChanged += onPlayConditionChanged;
-            PlayerSignals.Instance.onMoveConditionChanged += onMoveConditionChanged;
+            PlayerSignals.Instance.onPlayConditionChanged += OnPlayConditionChanged;
+            PlayerSignals.Instance.onMoveConditionChanged += OnMoveConditionChanged;
         }
+
+        private void OnPlayConditionChanged(bool condition) => _isReadyToPlay = condition;
+        private void OnMoveConditionChanged(bool condition) => _isReadyToMove = condition;
+
         private void UnSubscribeEvents()
         {
-            PlayerSignals.Instance.onPlayConditionChanged -= onPlayConditionChanged;
-            PlayerSignals.Instance.onMoveConditionChanged -= onMoveConditionChanged;
+            PlayerSignals.Instance.onPlayConditionChanged -= OnPlayConditionChanged;
+            PlayerSignals.Instance.onMoveConditionChanged -= OnMoveConditionChanged;
         }
+
         private void OnDisable()
         {
             UnSubscribeEvents();
         }
-        
-        private void onPlayConditionChanged(bool condition) => _isReadyToPlay = condition;
-        private void onMoveConditionChanged(bool condition) => _isReadyToMove = condition;
-
 
         public void UpdateInputValue(HorizontalInputParams inputParams)
         {
             _inputValue = inputParams.HorizontalInputValue;
-            _clampValue = inputParams.HorizontalInputClampSides;
+            _clampValues = inputParams.HorizontalInputClampSides;
         }
 
         private void Update()
@@ -87,21 +89,22 @@ namespace Runtime.Controllers.Player
                 }
             }
             else
-            {
                 Stop();
-            }
         }
 
         private void Move()
         {
             var velocity = rigidbody.velocity;
-            velocity = new Vector3(_inputValue * _data.SidewaysSpeed, velocity.y, _data.ForwardSpeed);
+            velocity = new Vector3(_inputValue * _data.SidewaysSpeed, velocity.y,
+                _data.ForwardSpeed);
             rigidbody.velocity = velocity;
 
             Vector3 position;
-            position = new Vector3(Mathf.Clamp(rigidbody.position.x, _clampValue.x, _clampValue.y),
-                (position = rigidbody.position).y, position.z);
-
+            position = new Vector3(
+                Mathf.Clamp(rigidbody.position.x, _clampValues.x,
+                    _clampValues.y),
+                (position = rigidbody.position).y,
+                position.z);
             rigidbody.position = position;
         }
 
@@ -115,14 +118,13 @@ namespace Runtime.Controllers.Player
         {
             rigidbody.velocity = Vector3.zero;
             rigidbody.angularVelocity = Vector3.zero;
-            
         }
 
         public void OnReset()
         {
             Stop();
-           _isReadyToMove = false;
-           _isReadyToPlay = false;
+            _isReadyToPlay = false;
+            _isReadyToMove = false;
         }
     }
 }

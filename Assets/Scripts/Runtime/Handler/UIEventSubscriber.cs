@@ -74,12 +74,7 @@ namespace Runtime.Handler
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-        private void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
-
+        
         private void UnsubscribeEvents()
         {
             switch (type)
@@ -107,6 +102,10 @@ namespace Runtime.Handler
                 }
             }
             
+        }
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
         }
     }
 }

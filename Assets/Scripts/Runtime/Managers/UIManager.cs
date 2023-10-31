@@ -7,26 +7,28 @@ namespace Runtime.Managers
 {
     public class UIManager : MonoBehaviour
     {
-        private void OnEnable()
+         private void OnEnable()
         {
-            SubscibeEvents();
+            SubscribeEvents();
+
             OpenStartPanel();
         }
-        private void SubscibeEvents()
+
+        private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onLevelInitialize += OnLevelInitialize;
             CoreGameSignals.Instance.onLevelFailed += OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
             CoreGameSignals.Instance.onReset += OnReset;
-
         }
+
         private void OpenStartPanel()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 0);
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Level, 1);
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Shop, 2);
-            
         }
+
         private void OnLevelInitialize(byte levelValue)
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Start, 0);
@@ -42,14 +44,17 @@ namespace Runtime.Managers
             CoreUISignals.Instance.onClosePanel?.Invoke(2);
             CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Follow);
         }
+
         private void OnOpenWinPanel()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Win, 2);
         }
+
         private void OnOpenFailPanel()
         {
             CoreUISignals.Instance.onOpenPanel?.Invoke(UIPanelTypes.Fail, 2);
         }
+
         public void OnNextLevel()
         {
             CoreGameSignals.Instance.onNextLevel?.Invoke();
@@ -61,15 +66,17 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onRestartLevel?.Invoke();
             CoreGameSignals.Instance.onReset?.Invoke();
         }
+
         private void OnLevelFailed()
         {
             OnOpenFailPanel();
         }
-        
+
         private void OnLevelSuccessful()
         {
             OnOpenWinPanel();
         }
+
         public void OnIncomeUpdate()
         {
             UISignals.Instance.onClickIncome?.Invoke();
@@ -81,21 +88,24 @@ namespace Runtime.Managers
             UISignals.Instance.onClickStack?.Invoke();
             UISignals.Instance.onSetStackLvlText?.Invoke();
         }
-        
-        private void UnsubscribeEvents()
+
+        private void OnDisable()
+        {
+            UnSubscribeEvents();
+        }
+
+        private void UnSubscribeEvents()
         {
             CoreGameSignals.Instance.onLevelInitialize -= OnLevelInitialize;
             CoreGameSignals.Instance.onLevelFailed -= OnLevelFailed;
             CoreGameSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
             CoreGameSignals.Instance.onReset -= OnReset;
         }
-        private void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
+
+
         private void OnReset()
         {
-            //CoreUISignals.Instance.onCloseAllPanel?.Invoke();
+            //CoreUISignals.Instance.onCloseAllPanels?.Invoke();
         }
 
        

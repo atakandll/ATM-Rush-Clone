@@ -12,12 +12,12 @@ namespace Runtime.Managers
 {
     public class CameraManager : MonoBehaviour
     {
-        #region Self Variables
+       #region Self Variables
 
         #region Serialized Variables
 
-        [SerializeField] private Animator animator;
         [SerializeField] private CinemachineStateDrivenCamera stateDrivenCamera;
+        [SerializeField] private Animator animator;
 
         #endregion
 
@@ -28,6 +28,8 @@ namespace Runtime.Managers
         #endregion
 
         #endregion
+
+        #region Event Subscriptions
 
         private void Awake()
         {
@@ -50,12 +52,6 @@ namespace Runtime.Managers
             CameraSignals.Instance.onSetCinemachineTarget += OnSetCinemachineTarget;
             CameraSignals.Instance.onChangeCameraState += OnChangeCameraState;
         }
-        
-
-        private void OnChangeCameraState(CameraStates cameraState)
-        {
-            animator.SetTrigger(cameraState.ToString());
-        }
 
         private void OnSetCinemachineTarget(CameraTargetState state)
         {
@@ -76,14 +72,12 @@ namespace Runtime.Managers
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(state), state, null);
-                
             }
-           
         }
-        
-        private void OnDisable()
+
+        private void OnChangeCameraState(CameraStates state)
         {
-            UnsubscribeEvents();
+            animator.SetTrigger(state.ToString());
         }
 
         private void UnsubscribeEvents()
@@ -92,12 +86,21 @@ namespace Runtime.Managers
             CameraSignals.Instance.onSetCinemachineTarget -= OnSetCinemachineTarget;
             CameraSignals.Instance.onChangeCameraState -= OnChangeCameraState;
         }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+
+        #endregion
+
+
         private void OnReset()
         {
-           CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Initial);
-           stateDrivenCamera.Follow = null;
-           stateDrivenCamera.LookAt = null;
-           transform.position = _initialPosition;
+            CameraSignals.Instance.onChangeCameraState?.Invoke(CameraStates.Initial);
+            stateDrivenCamera.Follow = null;
+            stateDrivenCamera.LookAt = null;
+            transform.position = _initialPosition;
         }
     }
 }
