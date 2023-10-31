@@ -13,12 +13,11 @@ namespace Runtime.Controllers.UI
         #region Serialized Variables
 
         [SerializeField] private TextMeshProUGUI incomeLvlText;
+        [SerializeField] private Button incomeLvlButton;
+        [SerializeField] private TextMeshProUGUI incomeValue;
+        [SerializeField] private Button stackLvlButton;
         [SerializeField] private TextMeshProUGUI stackLvlText;
         [SerializeField] private TextMeshProUGUI stackValue;
-        [SerializeField] private TextMeshProUGUI incomeValue;
-        [SerializeField] private Button incomeLvlButton;
-        [SerializeField] private Button stackLvlButton;
-     
 
         #endregion
 
@@ -31,14 +30,30 @@ namespace Runtime.Controllers.UI
 
         private void SubscribeEvents()
         {
-            UISignals.Instance.onSetIncomeLvlText += OnSetIncomeLvlText;
-            UISignals.Instance.onSetStackLvlText += OnSetStackLvlText;
+            UISignals.Instance.onSetIncomeLvlText += OnSetIncomeLvLText;
+            UISignals.Instance.onSetStackLvlText += OnSetStackLvLText;
         }
+
+        private void OnSetStackLvLText()
+        {
+            stackLvlText.text = "Stack lvl\n" + CoreGameSignals.Instance.onGetStackLevel();
+            stackValue.text = (Mathf.Pow(2, Mathf.Clamp(CoreGameSignals.Instance.onGetStackLevel(), 0, 10)) * 100)
+                .ToString();
+        }
+
+        private void OnSetIncomeLvLText()
+        {
+            incomeLvlText.text = "Income lvl\n" + CoreGameSignals.Instance.onGetIncomeLevel();
+            incomeValue.text = (Mathf.Pow(2, Mathf.Clamp(CoreGameSignals.Instance.onGetIncomeLevel(), 0, 10)) * 100)
+                .ToString();
+        }
+
         private void UnSubscribeEvents()
         {
-            UISignals.Instance.onSetIncomeLvlText -= OnSetIncomeLvlText;
-            UISignals.Instance.onSetStackLvlText -= OnSetStackLvlText;
+            UISignals.Instance.onSetIncomeLvlText -= OnSetIncomeLvLText;
+            UISignals.Instance.onSetStackLvlText -= OnSetStackLvLText;
         }
+
         private void OnDisable()
         {
             UnSubscribeEvents();
@@ -46,31 +61,17 @@ namespace Runtime.Controllers.UI
 
         private void Start()
         {
-            SyncShopUI();
+            SyncShopUi();
         }
 
-        private void SyncShopUI()
+        private void SyncShopUi()
         {
-            OnSetIncomeLvlText();
-            OnSetStackLvlText();  
+            OnSetIncomeLvLText();
+            OnSetStackLvLText();
             ChangesIncomeInteractable();
             ChangesStackInteractable();
         }
 
-        private void OnSetStackLvlText()
-        {
-            stackLvlText.text = "Stack lvl\n" + CoreGameSignals.Instance.onGetStackLevel();
-            stackValue.text = (Mathf.Pow(2, Mathf.Clamp(CoreGameSignals.Instance.onGetStackLevel(), 0, 10)) * 100)
-                .ToString();
-        }
-
-        private void OnSetIncomeLvlText()
-        {
-            incomeLvlText.text = "Income lvl\n" + CoreGameSignals.Instance.onGetIncomeLevel();
-            incomeValue.text = (Mathf.Pow(2, Mathf.Clamp(CoreGameSignals.Instance.onGetIncomeLevel(), 0, 10)) * 100)
-                .ToString();
-        }
-        
         private void ChangesIncomeInteractable()
         {
             if (int.Parse(UISignals.Instance.onGetMoneyValue?.Invoke().ToString()!) < int.Parse(incomeValue.text) ||

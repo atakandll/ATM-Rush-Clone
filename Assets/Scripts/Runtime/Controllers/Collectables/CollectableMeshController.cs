@@ -12,7 +12,7 @@ namespace Runtime.Controllers.Collectables
 
         #region Serialized Variables
 
-        [SerializeField] private new MeshFilter meshFilter;
+        [SerializeField] private MeshFilter meshFilter;
 
         #endregion
 
@@ -24,22 +24,23 @@ namespace Runtime.Controllers.Collectables
 
         #endregion
 
+
         private void OnEnable()
         {
             ActivateMeshVisuals();
         }
-        
-        internal void SetMeshData(CollectableMeshData collectableDataMeshData)
+
+        internal void SetMeshData(CollectableMeshData meshData)
         {
-            _data = collectableDataMeshData;
+            _data = meshData;
         }
+
         private void ActivateMeshVisuals()
         {
-           meshFilter.mesh = _data.MeshList[0];
+            meshFilter.mesh = _data.MeshList[0];
         }
 
-
-        public void OnUpgradeCollectableVisuals(int value)
+        internal void OnUpgradeCollectableVisuals(int value)
         {
             meshFilter.mesh = _data.MeshList[value];
         }

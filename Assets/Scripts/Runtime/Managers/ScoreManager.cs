@@ -43,27 +43,30 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onLevelFailed += RefreshMoney;
             UISignals.Instance.onClickIncome += OnSetValueMultiplier;
         }
+
         private void OnSendMoney(int value)
         {
             _money = value;
         }
+
         private void OnSetScore(int setScore)
         {
             _scoreCache = (setScore * _stackValueMultiplier) + _atmScoreValue;
             PlayerSignals.Instance.onSetTotalScore?.Invoke(_scoreCache);
         }
+
         private void OnSetAtmScore(int atmValues)
         {
             _atmScoreValue += atmValues * _stackValueMultiplier;
             AtmSignals.Instance.onSetAtmScoreText?.Invoke(_atmScoreValue);
-            
         }
 
         private void OnSetValueMultiplier()
         {
             _stackValueMultiplier = CoreGameSignals.Instance.onGetIncomeLevel();
         }
-        private void UnsubscribeEvents()
+
+        private void UnSubscribeEvents()
         {
             ScoreSignals.Instance.onSendMoney -= OnSendMoney;
             ScoreSignals.Instance.onGetMoney -= () => _money;
@@ -79,7 +82,7 @@ namespace Runtime.Managers
 
         private void OnDisable()
         {
-            UnsubscribeEvents();
+            UnSubscribeEvents();
         }
 
         private void Start()
@@ -87,6 +90,7 @@ namespace Runtime.Managers
             OnSetValueMultiplier();
             RefreshMoney();
         }
+
         private int GetMoneyValue()
         {
             if (!ES3.FileExists()) return 0;

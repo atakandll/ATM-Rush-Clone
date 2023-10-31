@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 6238243955059427508}
   - component: {fileID: 6238243955059427511}
   - component: {fileID: 6238243955059427510}
-  - component: {fileID: 6238243955059427509}
+  - component: {fileID: 4080396374924377183}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -302,7 +302,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6238243955059427509
+--- !u!114 &4080396374924377183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -314,8 +314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc63e39ed3845e59b94b564c1c50094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 6238243955059427510}
   stateDrivenCamera: {fileID: 6238243955059427511}
+  animator: {fileID: 6238243955059427510}
 --- !u!1 &6238243955227432237
 GameObject:
   m_ObjectHideFlags: 0

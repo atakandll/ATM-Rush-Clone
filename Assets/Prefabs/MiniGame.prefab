@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 124136432874902681}
-  - component: {fileID: 124136432874902682}
+  - component: {fileID: 942260722388427044}
   m_Layer: 0
   m_Name: MiniGame
   m_TagString: Untagged
@@ -65,7 +65,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &124136432874902682
+--- !u!114 &942260722388427044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
   mat: {fileID: 2100000, guid: 43c2e0549ffaebf4da1e69c47fec75f1, type: 2}
   wallCount: 90
   fakeMoneyCount: 15
-  wallCheckController: {fileID: 2028562358}
+  wallChecker: {fileID: 181760879346099484}
 --- !u!1001 &1167911026942537339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -195,7 +195,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 10, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2028562358
+--- !u!114 &181760879346099484
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f3bfeb05574ad4baa533f51ea53bf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 124136432874902682}
+  manager: {fileID: 0}
 --- !u!4 &1952512747341468218 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 805571606232316993, guid: c2d8180f8cae5df4988953fb17f1a479,

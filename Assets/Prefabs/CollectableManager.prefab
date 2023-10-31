@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1734958320658155536}
-  - component: {fileID: 2297952078168791736}
+  - component: {fileID: 276005661853099842}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 1734958321483701034}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2297952078168791736
+--- !u!114 &276005661853099842
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1734958321483701034}
-  - component: {fileID: 1734958321483701035}
+  - component: {fileID: 457867051946874187}
   m_Layer: 0
   m_Name: CollectableManager
   m_TagString: Collectable
@@ -80,7 +80,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1734958321483701035
+--- !u!114 &457867051946874187
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4119896df834cd68e2abfc6242d53fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshController: {fileID: 2297952078168791736}
-  physicsController: {fileID: 4237066184765394161}
+  meshController: {fileID: 276005661853099842}
+  physicsController: {fileID: 7100084945213330301}
 --- !u!1 &1734958321690011293
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1734958321690011363}
-  - component: {fileID: 4237066184765394161}
+  - component: {fileID: 7100084945213330301}
   - component: {fileID: 8222521586747451}
   - component: {fileID: 7726864012387231185}
   m_Layer: 0
@@ -128,7 +128,7 @@ Transform:
   m_Father: {fileID: 1734958321483701034}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4237066184765394161
+--- !u!114 &7100084945213330301
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 669357a4cce54657a82e408a2b886efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 1734958321483701035}
+  manager: {fileID: 457867051946874187}
 --- !u!65 &8222521586747451
 BoxCollider:
   m_ObjectHideFlags: 0

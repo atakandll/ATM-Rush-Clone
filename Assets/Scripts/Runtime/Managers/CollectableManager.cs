@@ -21,12 +21,10 @@ namespace Runtime.Managers
 
         #region Private Variables
 
-        [ShowInInspector] private CollectableData _collectableData;
-        [ShowInInspector] private byte _currentValue;
-        
-        
-        
-        private readonly string collectableDataPath = "Data/CD_Collectable";
+        [ShowInInspector] private CollectableData _data;
+        [ShowInInspector] private byte _currentValue = 0;
+
+        private readonly string _collectableDataPath = "Data/CD_Collectable";
 
         #endregion
 
@@ -34,44 +32,46 @@ namespace Runtime.Managers
 
         private void Awake()
         {
-            _collectableData = GetCollectableData();
-            SendDataToControllers();
+            _data = GetCollectableData();
+            SendDataToController();
         }
-        private CollectableData GetCollectableData()
+
+        private CollectableData GetCollectableData() => Resources.Load<CD_Collectable>(_collectableDataPath).Data;
+
+        private void SendDataToController()
         {
-            return Resources.Load<CD_Collectable>(collectableDataPath).Data;
+            meshController.SetMeshData(_data.MeshData);
         }
-        private void SendDataToControllers()
+
+      
+        internal void CollectableUpgrade(int value)
         {
-            meshController.SetMeshData(_collectableData.MeshData);
-        }
-        
-        internal void OnCollectableUpgrade(int value)
-        {
-            if (_currentValue < 2) // Bu, bir tür sınırlama getirerek toplanabilir nesnenin yükseltme sayısını en fazla 2 yapar.
-                _currentValue++;
-            
+            if (_currentValue < 2) _currentValue++;
             meshController.OnUpgradeCollectableVisuals(_currentValue);
-            
             StackSignals.Instance.onUpdateType?.Invoke();
         }
+
         public byte GetCurrentValue()
         {
             return _currentValue;
         }
-        public void InteractionWithCollectables(GameObject collectableGameObject)
+
+        public void InteractionWithCollectable(GameObject collectableGameObject)
         {
             StackSignals.Instance.onInteractionCollectable?.Invoke(collectableGameObject);
         }
-        public void InteractionWithATM(GameObject atmGameObject)
+
+        public void InteractionWithAtm(GameObject collectableGameObject)
         {
-            StackSignals.Instance.onInteractionATM?.Invoke(atmGameObject); // stack listesinden çıkarılıp para olarak aktarma
+            StackSignals.Instance.onInteractionATM?.Invoke(collectableGameObject);
         }
-        public void InteractionWithObstacle(GameObject obstacleGameObject)
+
+        public void InteractionWithObstacle(GameObject collectableGameObject)
         {
-            StackSignals.Instance.onInteractionObstacle?.Invoke(obstacleGameObject);
+            StackSignals.Instance.onInteractionObstacle?.Invoke(collectableGameObject);
         }
-        public void InteractionWithMiniGame()
+
+        public void InteractionWithConveyor()
         {
             StackSignals.Instance.onInteractionConveyor?.Invoke();
         }

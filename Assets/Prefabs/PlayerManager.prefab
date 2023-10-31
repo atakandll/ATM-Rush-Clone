@@ -1551,7 +1551,7 @@ GameObject:
   - component: {fileID: 4328435949904951779}
   - component: {fileID: 313561453531336333}
   - component: {fileID: 4920222493048728722}
-  - component: {fileID: 3562346819130660552}
+  - component: {fileID: 6093355407369305591}
   m_Layer: 0
   m_Name: Physics
   m_TagString: Player
@@ -1603,7 +1603,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 5, z: 4}
   m_Center: {x: 0, y: 2.5, z: 1.26}
---- !u!114 &3562346819130660552
+--- !u!114 &6093355407369305591
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1615,7 +1615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9c3fdb50aa4e0381923391fbd2e7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managerRigidbody: {fileID: 313561453531336333}
+  managerRigidbody: {fileID: 869464903192760335}
 --- !u!1 &4328435950445389309
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,8 +1626,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4328435950445389299}
   - component: {fileID: 869464903192760335}
-  - component: {fileID: 6503759119471420661}
-  - component: {fileID: 3176190162906252147}
+  - component: {fileID: 2596103641278873331}
+  - component: {fileID: 1787385573573713903}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -1668,7 +1668,7 @@ Rigidbody:
   m_Interpolate: 2
   m_Constraints: 116
   m_CollisionDetection: 2
---- !u!114 &6503759119471420661
+--- !u!114 &2596103641278873331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1680,11 +1680,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e6de8480f745298d5cceea51529825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementController: {fileID: 3176190162906252147}
-  animationController: {fileID: 387450760272074591}
-  physicsController: {fileID: 3562346819130660552}
-  meshController: {fileID: 7216884527926004260}
---- !u!114 &3176190162906252147
+  movementController: {fileID: 1787385573573713903}
+  animationController: {fileID: 754090581724512668}
+  physicsController: {fileID: 6093355407369305591}
+  meshController: {fileID: 2054472564351292702}
+--- !u!114 &1787385573573713903
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1696,7 +1696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b53268ba5ff2495a98a84540f553865e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 6503759119471420661}
+  manager: {fileID: 2596103641278873331}
   rigidbody: {fileID: 869464903192760335}
 --- !u!1 &4328435950865445286
 GameObject:
@@ -1708,8 +1708,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4328435950865445287}
   - component: {fileID: 2200964010714191009}
-  - component: {fileID: 7216884527926004260}
-  - component: {fileID: 387450760272074591}
+  - component: {fileID: 2054472564351292702}
+  - component: {fileID: 754090581724512668}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -1755,7 +1755,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7216884527926004260
+--- !u!114 &2054472564351292702
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1768,7 +1768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 304959963014692221}
---- !u!114 &387450760272074591
+--- !u!114 &754090581724512668
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

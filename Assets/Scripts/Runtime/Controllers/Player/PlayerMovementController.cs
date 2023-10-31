@@ -11,7 +11,7 @@ namespace Runtime.Controllers.Player
 {
     public class PlayerMovementController : MonoBehaviour
     {
-        #region Self Variables
+         #region Self Variables
 
         #region Serialized Variables
 

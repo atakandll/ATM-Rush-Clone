@@ -87,7 +87,7 @@ namespace Runtime.Managers
 
         private void OnSetTotalScore(int value)
         {
-            meshController.OnSetTotalScore(value);
+            meshController.SetTotalScore(value);
         }
 
         private void OnReset()

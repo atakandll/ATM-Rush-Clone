@@ -31,17 +31,17 @@ namespace Runtime.Controllers.Collectables
             if (other.CompareTag(_collectable) && CompareTag(_collected))
             {
                 other.tag = _collected;
-                manager.InteractionWithCollectables(other.transform.parent.gameObject);
+                manager.InteractionWithCollectable(other.transform.parent.gameObject);
             }
 
             if (other.CompareTag(_gate) && CompareTag(_collected))
             {
-                manager.OnCollectableUpgrade(manager.GetCurrentValue());
+                manager.CollectableUpgrade(manager.GetCurrentValue());
             }
 
             if (other.CompareTag(_atm) && CompareTag(_collected))
             {
-                manager.InteractionWithATM(transform.parent.gameObject);
+                manager.InteractionWithAtm(transform.parent.gameObject);
             }
 
             if (other.CompareTag(_obstacle) && CompareTag(_collected))
@@ -51,7 +51,7 @@ namespace Runtime.Controllers.Collectables
 
             if (other.CompareTag(_conveyor) && CompareTag(_collected))
             {
-                manager.InteractionWithMiniGame();
+                manager.InteractionWithConveyor();
             }
         }
     }

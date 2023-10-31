@@ -59,15 +59,22 @@ namespace Runtime.Managers
             {
                 case CameraTargetState.Player:
                 {
-                    var playerManager = FindObjectOfType<PlayerManager>().transform;
-                    stateDrivenCamera.Follow = playerManager;
+                    var playerManager = FindObjectOfType<PlayerManager>();
+                    if (playerManager != null) {
+                        stateDrivenCamera.Follow = playerManager.transform;
+                    } else {
+                        Debug.LogError("PlayerManager bulunamadı!");
+                    }
                 }
                     break;
                 case CameraTargetState.FakePlayer:
                 {
-                    stateDrivenCamera.Follow = null;
-                    var fakePlayer = FindObjectOfType<WallCheckController>().transform.parent.transform;
-                    stateDrivenCamera.Follow = fakePlayer;
+                    var fakePlayerController = FindObjectOfType<WallCheckController>();
+                    if (fakePlayerController != null) {
+                        stateDrivenCamera.Follow = fakePlayerController.transform.parent;
+                    } else {
+                        Debug.LogError("WallCheckController bulunamadı!");
+                    }
                 }
                     break;
                 default:

@@ -18,7 +18,7 @@ namespace Runtime.Controllers.Player
 
         #endregion
         
-        public void OnSetTotalScore(int score)
+        public void SetTotalScore(int score)
         {
            scoreText.text = score.ToString();
         }

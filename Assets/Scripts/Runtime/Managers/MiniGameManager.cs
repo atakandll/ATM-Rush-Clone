@@ -12,19 +12,19 @@ namespace Runtime.Managers
     {
         #region Self Variables
 
-        #region Serialized Variables
+        #region Serialized Veriables
 
         [SerializeField] private GameObject wallObject;
         [SerializeField] private GameObject fakeMoneyObject;
         [SerializeField] private Transform fakePlayer;
         [SerializeField] private Material mat;
-        
+
         [SerializeField] private short wallCount, fakeMoneyCount;
-        
-        [SerializeField] private WallCheckController wallCheckController;
+
+        [SerializeField] private WallCheckController wallChecker;
 
         #endregion
-        
+
         #region Private Veriables
 
         private int _score;
@@ -32,8 +32,7 @@ namespace Runtime.Managers
         private Vector3 _initializePos;
 
         #endregion
-        
-        
+
         #endregion
 
         private void OnEnable()
@@ -48,7 +47,8 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onMiniGameStart += OnMiniGameStart;
             CoreGameSignals.Instance.onReset += OnReset;
         }
-        
+
+
         private void OnMiniGameStart()
         {
             fakePlayer.gameObject.SetActive(true);
@@ -69,6 +69,7 @@ namespace Runtime.Managers
                 CoreGameSignals.Instance.onLevelSuccessful?.Invoke();
             }
         }
+
         internal void SetMultiplier(float multiplierValue)
         {
             _multiplier = multiplierValue;
@@ -81,7 +82,7 @@ namespace Runtime.Managers
 
         private void OnSendScore(int scoreValue)
         {
-           _score = scoreValue;
+            _score = scoreValue;
         }
 
         private void UnSubscribeEvents()
@@ -97,8 +98,6 @@ namespace Runtime.Managers
             UnSubscribeEvents();
         }
 
-       
-
         private void Start()
         {
             SpawnWallObjects();
@@ -113,12 +112,11 @@ namespace Runtime.Managers
 
         private void SpawnWallObjects()
         {
-            for (int i = 0; i < wallCount; i++)
+            for (int i = 0; i <= wallCount; i++)
             {
                 var ob = Instantiate(wallObject, transform);
-                ob.transform.localPosition = new Vector3(0, i * 30, 0);
+                ob.transform.localPosition = new Vector3(0, i * 10, 0);
                 ob.transform.GetChild(0).GetComponent<TextMeshPro>().text = "x" + ((i / 10f) + 1f);
-
             }
         }
 
@@ -127,8 +125,7 @@ namespace Runtime.Managers
             for (int i = 0; i < fakeMoneyCount; i++)
             {
                 var ob = Instantiate(fakeMoneyObject, fakePlayer);
-                ob.transform.localPosition = new Vector3(0, -1 * 1.58f, -7);
-
+                ob.transform.localPosition = new Vector3(0, -i * 1.58f, -7);
             }
         }
 
@@ -140,6 +137,7 @@ namespace Runtime.Managers
                 transform.GetChild(i).transform.position = Vector3.zero;
             }
         }
+
         private void OnReset()
         {
             StopAllCoroutines();
@@ -152,8 +150,7 @@ namespace Runtime.Managers
         {
             fakePlayer.gameObject.SetActive(false);
             fakePlayer.localPosition = _initializePos;
-            wallCheckController.OnReset();
-
+            wallChecker.OnReset();
         }
     }
 }

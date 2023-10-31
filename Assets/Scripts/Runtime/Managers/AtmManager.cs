@@ -12,10 +12,11 @@ namespace Runtime.Managers
 
         #region Serialized Variables
 
-        [SerializeField] private DOTweenAnimation dOTweenAnimation;
+        [SerializeField] private DOTweenAnimation doTweenAnimation;
         [SerializeField] private TextMeshPro atmText;
 
         #endregion
+
         #endregion
 
         private void Awake()
@@ -25,7 +26,7 @@ namespace Runtime.Managers
 
         private void GetReferences()
         {
-            dOTweenAnimation = GetComponentInChildren<DOTweenAnimation>();
+            doTweenAnimation = GetComponentInChildren<DOTweenAnimation>();
         }
 
         private void OnEnable()
@@ -38,27 +39,30 @@ namespace Runtime.Managers
             CoreGameSignals.Instance.onAtmTouched += OnAtmTouched;
             AtmSignals.Instance.onSetAtmScoreText += OnSetAtmScoreText;
         }
-        
-        private void OnAtmTouched(GameObject touchedAtmObject)
+
+
+        private void OnAtmTouched(GameObject touchedATMObject)
         {
-            if (touchedAtmObject.GetInstanceID() == gameObject.GetInstanceID())
+            if (touchedATMObject.GetInstanceID() == gameObject.GetInstanceID())
             {
-                dOTweenAnimation.DOPlay();
+                doTweenAnimation.DOPlay();
             }
         }
+
         private void OnSetAtmScoreText(int value)
         {
             atmText.text = value.ToString();
         }
 
-        private void UnsubscribeEvents()
+        private void UnSubscribeEvents()
         {
             CoreGameSignals.Instance.onAtmTouched -= OnAtmTouched;
             AtmSignals.Instance.onSetAtmScoreText -= OnSetAtmScoreText;
         }
+
         private void OnDisable()
         {
-            UnsubscribeEvents();
+            UnSubscribeEvents();
         }
 
        

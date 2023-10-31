@@ -16,12 +16,12 @@ namespace Runtime.Controllers.Player
 
         #endregion
 
-        #region Private Variables 
+        #region Private Variables
 
         private readonly string _obstacle = "Obstacle";
         private readonly string _atm = "ATM";
         private readonly string _collectable = "Collectable";
-        private readonly string _miniGame = "MiniGame";
+        private readonly string _conveyor = "MiniGame";
 
         #endregion
 
@@ -35,13 +35,13 @@ namespace Runtime.Controllers.Player
                     .SetEase(Ease.OutBack);
                 return;
             }
-            
+
             if (other.CompareTag(_atm))
             {
                 CoreGameSignals.Instance.onAtmTouched?.Invoke(other.gameObject);
                 return;
             }
-            
+
             if (other.CompareTag(_collectable))
             {
                 other.tag = "Collected";
@@ -49,7 +49,7 @@ namespace Runtime.Controllers.Player
                 return;
             }
 
-            if (other.CompareTag(_miniGame))
+            if (other.CompareTag(_conveyor))
             {
                 CoreGameSignals.Instance.onMiniGameEntered?.Invoke();
                 DOVirtual.DelayedCall(1.5f,
