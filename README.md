@@ -1,5 +1,5 @@
 # ATM-Rush-Clone
-This project is a clone of ATM Rush game you can acces to the original game from these link.
+This project is a clone of ATM Rush game you can acces to the original game from this link.
 
 App store: https://apps.apple.com/us/app/atm-rush/id1585934395
 
