@@ -6,7 +6,7 @@ App store: https://apps.apple.com/us/app/atm-rush/id1585934395
 Watch the `gameplay` of the ATM Rush Clone: https://youtu.be/UDTMLAZzLkA
 
 ## Overview
-  Welcome to the repository of our ATM Rush Clone, an engaging mobile game developed using Unity. This project aims not just to replicate the fun and dynamic experience of the original ATM Rush but also to enhance it with robust architectural principles, cutting-edge technologies, and refined gameplay mechanics. Our clone stands out with its meticulous attention to detail, adherence to SOLID principles, and utilization of design patterns like Singleton, Command, Observer, Strategy, and State for scalable and maintainable code architecture.
+  Welcome to the repository of ATM Rush Clone, an engaging mobile game developed using Unity. This project aims not just to replicate the fun and dynamic experience of the original ATM Rush but also to enhance it with robust architectural principles, cutting-edge technologies, and refined gameplay mechanics. Our clone stands out with its meticulous attention to detail, adherence to SOLID principles, and utilization of design patterns like Singleton, Command, Observer, Strategy, and State for scalable and maintainable code architecture.
 
 ![ClampGift](https://github.com/atakandll/ATM-Rush-Clone/assets/130579265/3753a4d0-49c3-4078-ba59-2f21be6bcc2d)
 
